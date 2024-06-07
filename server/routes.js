@@ -3,6 +3,26 @@ const { Question, Language, QuestionLanguage, TestCase } = require("./models");
 const codeExecutor = require("./codeExecutor");
 
 const router = express.Router();
+
+router.get("/question/:questionId", async (req, res) => {
+  try {
+    const { questionId } = req.params;
+    const questions = await Question.findByPk(questionId);
+    res.json(questions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/questions", async (req, res) => {
+  try {
+    const questions = await Question.findAll();
+    res.json(questions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.get("/test-cases/:questionId", async (req, res) => {
   try {
     const { questionId } = req.params;

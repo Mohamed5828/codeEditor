@@ -1,13 +1,20 @@
-import { useState } from "react";
 import { Box } from "@chakra-ui/react";
-import CodeEditor from "./components/CodeEditor";
+import SingleQuestionPage from "./layout/SingleQuestionPage";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AllQuestionsPage from "./layout/AllQuestionsPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Box minH="100vh" bg="#0f0a19" color="gray.500" px={6} py={8}>
-      <CodeEditor />
+      <Router>
+        <Routes>
+          <Route path="/" element={<AllQuestionsPage />} />
+          <Route
+            path={"/question/:questionId"}
+            element={<SingleQuestionPage />}
+          />
+        </Routes>
+      </Router>
     </Box>
   );
 }

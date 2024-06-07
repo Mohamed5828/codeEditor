@@ -34,7 +34,7 @@ function Output({ code, language, questionId }) {
   };
 
   return (
-    <Box w="50%">
+    <Box w="25%">
       <Text mb={2} fontSize="lg">
         Output
       </Text>
@@ -46,6 +46,16 @@ function Output({ code, language, questionId }) {
         onClick={runCode}
       >
         Run Code
+      </Button>
+      <Button
+        variant="outline"
+        colorScheme="blue"
+        mb={4}
+        isLoading={isLoading}
+        onClick={""}
+        ml={4}
+      >
+        Submit
       </Button>
       <Box
         height="75vh"
