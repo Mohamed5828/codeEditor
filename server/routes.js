@@ -1,6 +1,6 @@
 const express = require("express");
 const { Question, Language, QuestionLanguage, TestCase } = require("./models");
-const codeExecutor = require("./codeExecutor");
+const { executeCode } = require("./codeExecutor");
 
 const router = express.Router();
 
@@ -80,28 +80,7 @@ router.post("/run/:questionId", async (req, res) => {
       return res.status(404).send("Test cases not found");
     }
 
-    const results = await Promise.all(
-      testCases.map(async (testCase) => {
-        const { test_input, test_output } = testCase;
-
-        const actualOutput = await codeExecutor.executeCode(
-          code,
-          test_input,
-          language,
-          version
-        );
-
-        const passed = actualOutput === test_output;
-
-        return {
-          test_id: testCase.test_id,
-          input: test_input,
-          expectedOutput: test_output,
-          actualOutput,
-          passed,
-        };
-      })
-    );
+    const results = await executeCode(code, testCases, language, version);
 
     res.json(results);
   } catch (error) {

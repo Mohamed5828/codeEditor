@@ -5,7 +5,7 @@ import AllQuestionsPage from "./layout/AllQuestionsPage";
 
 function App() {
   return (
-    <Box minH="100vh" bg="#0f0a19" color="gray.500" px={6} py={8}>
+    <Box minH="100vh" bg="#0f0a19" color="gray.500" px={10} py={8}>
       <Router>
         <Routes>
           <Route path="/" element={<AllQuestionsPage />} />

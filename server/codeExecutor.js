@@ -10,32 +10,32 @@ const executeCode = async (code, testCases, language, version) => {
       language: language,
       version: version,
       files: [{ content: code }],
-      stdin: testCase.test_case,
+      stdin: testCase.test_input,
     };
 
     try {
+      // console.log("Payload:", payload);
       const response = await axios.post(PISTON_API_URL, payload);
       const output = response.data.run.output.trim();
-      const expectedOutput = testCase.test_output.trim();
-      const passed = output === expectedOutput;
 
       results.push({
-        test_id: testCase.test_id,
+        test_id: testCase.id,
         input: testCase.test_input,
-        output,
-        expectedOutput,
-        passed,
+        output: output,
+        expectedOutput: testCase.test_output,
+        response: response.data,
       });
     } catch (error) {
+      console.error("Error:", error.message);
       results.push({
-        test_id: testCase.test_id,
+        test_id: testCase.id,
         input: testCase.test_input,
-        error: error.message,
-        passed: false,
+        output: error.message,
+        expectedOutput: testCase.test_output,
       });
     }
   }
-
+  // console.log(results);
   return results;
 };
 

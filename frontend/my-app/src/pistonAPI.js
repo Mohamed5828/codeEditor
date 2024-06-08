@@ -11,5 +11,6 @@ export const executeCode = async (language, code, questionId) => {
     code,
     version: LANGUAGE_VERSIONS[language],
   });
+  console.log(response);
   return response.data;
 };

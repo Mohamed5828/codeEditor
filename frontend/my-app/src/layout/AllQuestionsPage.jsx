@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Text,
+  Center,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -27,34 +28,33 @@ function AllQuestionsPage() {
     fetchQuestion();
   }, []);
   return (
-    <Accordion>
-      {questionsData &&
-        questionsData.map((question) => (
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  <Text fontSize="xl">Question Number {question.id}</Text>
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              <Box>{question.title}</Box>
-              <Link to={`/question/${question.id}`}>
-                <Button
-                  variant="outline"
-                  colorScheme="blue"
-                  mt={4}
-                  onClick={""}
-                >
-                  Solve
-                </Button>
-              </Link>
-            </AccordionPanel>
-          </AccordionItem>
-        ))}
-    </Accordion>
+    <Center>
+      <Box width="75%">
+        <Accordion>
+          {questionsData &&
+            questionsData.map((question) => (
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box as="span" flex="1" textAlign="left">
+                      <Text fontSize="xl">Question Number {question.id}</Text>
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <Box>{question.title}</Box>
+                  <Link to={`/question/${question.id}`}>
+                    <Button variant="outline" colorScheme="blue" mt={4}>
+                      Solve
+                    </Button>
+                  </Link>
+                </AccordionPanel>
+              </AccordionItem>
+            ))}
+        </Accordion>
+      </Box>
+    </Center>
   );
 }
 
